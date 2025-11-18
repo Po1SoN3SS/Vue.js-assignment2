@@ -1,5 +1,13 @@
 <template>
   <div class="list">
+    <transition-group name="fade" tag="div" class="cards">
+      <student-card
+      v-for="s in students"
+      :key="s.id"
+      :student="s"
+      @remove="remove(s.id)"
+      />
+    </transition-group>
       <!--
         TASK:
         1. Display all students in a list using the StudentCard component to display each student.

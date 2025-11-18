@@ -1,7 +1,9 @@
 <template>
   <div class="app">
     <h1>🎓 Student Dashboard</h1>
-
+    <button class="add-button" @click="toggleForm">
+      {{ showForm ? "Close" : "Add Student" }}
+    </button>
     <transition name="fade">
       <AddStudentForm
         v-if="showForm"
@@ -57,7 +59,7 @@ h1 {
   margin-bottom: 20px;
 }
 
-.add-btn {
+.add-button {
   background: #4f46e5;
   color: white;
   border: none;
@@ -66,7 +68,7 @@ h1 {
   cursor: pointer;
   transition: 0.3s;
 }
-.add-btn:hover {
+.add-button:hover {
   background: #3730a3;
 }
 
