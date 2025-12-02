@@ -11,17 +11,32 @@
       />
     </transition>
 
+    <div class="filter-buttons">
+      <router-link to="/" class="filter-btn" :class="{ active: $route.meta.filter === 'all' }">
+        All
+      </router-link>
+      <router-link to="/under-21" class="filter-btn" :class="{ active: $route.meta.filter === 'under21' }">
+        Under 21
+      </router-link>
+      <router-link to="/over-21" class="filter-btn" :class="{ active: $route.meta.filter === 'over21' }">
+        Over 21
+      </router-link>
+    </div>
+
     <StudentList
-      :students="students"
+      :students="filteredStudents"
       @remove-student="removeStudent"
     />
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import StudentList from '../components/StudentList.vue'
 import AddStudentForm from '../components/AddStudentForm.vue'
+
+const route = useRoute()
 
 const students = ref([
   { id: 1, name: 'Alice Johnson', age: 21 },
@@ -40,6 +55,18 @@ const addStudent = (student) => {
 const removeStudent = (id) => {
   students.value = students.value.filter((s) => s.id !== id)
 }
+
+const filteredStudents = computed(() => {
+  const filter = route.meta.filter
+  
+  if (filter === 'under21') {
+    return students.value.filter(s => s.age < 21)
+  } else if (filter === 'over21') {
+    return students.value.filter(s => s.age >= 21)
+  }
+  
+  return students.value
+})
 </script>
 
 <style scoped>
@@ -70,6 +97,34 @@ h1 {
 }
 .add-button:hover {
   background: #3730a3;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.filter-btn {
+  background: #e5e7eb;
+  color: #374151;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.filter-btn:hover {
+  background: #d1d5db;
+}
+
+.filter-btn.active {
+  background: #4f46e5;
+  color: white;
 }
 
 .fade-enter-active,

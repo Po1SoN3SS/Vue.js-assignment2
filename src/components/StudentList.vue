@@ -8,12 +8,6 @@
       @remove="remove(s.id)"
       />
     </transition-group>
-      <!--
-        TASK:
-        1. Display all students in a list using the StudentCard component to display each student.
-        2. Use the transition-group component to animate the list.
-        3. Catch the 'remove' event and emit 'remove-student' from this component with the student's id.
-    -->
   </div>
 </template>
 
