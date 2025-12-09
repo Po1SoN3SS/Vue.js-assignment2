@@ -7,12 +7,16 @@
       :student="s"
       @remove="remove(s.id)"
       />
+
     </transition-group>
   </div>
 </template>
 
 <script setup>
 import StudentCard from './StudentCard.vue'
+import { useRouter } from 'vue-router'
+
+
 
 defineProps({
   students: Array

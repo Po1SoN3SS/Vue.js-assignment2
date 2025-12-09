@@ -115,7 +115,7 @@ h1 {
   cursor: pointer;
   text-decoration: none;
   font-weight: 500;
-  transition: all 0.3s;
+  transition: all 0.1s;
 }
 
 .filter-btn:hover {
